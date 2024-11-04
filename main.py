@@ -1,18 +1,14 @@
 from defs import cadastro, dados_usuario, sair_s, mostrar_usuario, ReturnToMain
 import os
 
-
 memoria = {}
 
 def limpar_tela():
     os.system('cls')
-
-def limpar_tela():
-    print("\n" * 100)  # Limpa a tela no terminal, simulando uma nova página
+    
 
 def menu_principal():
     while True:
-        limpar_tela()
         print("=" * 40)
         print(" " * 10 + "📋 MENU DE OPÇÕES 📋")
         print("=" * 40)
@@ -24,14 +20,12 @@ def menu_principal():
         
         opcoes = input("🔹 Insira a opção desejada: ")
         
-        # Verifica se a opção é válida
         if opcoes not in ['1', '2', '3', '0']:
-            limpar_tela()
             print("⚠️ Opção inválida. Tente novamente.")
+            input("Pressione Enter para continuar...")
             continue
-        
+
         try:
-            # Executa a ação correspondente à opção escolhida
             if opcoes == '1':
                 limpar_tela()
                 cadastro(memoria)  
@@ -42,15 +36,13 @@ def menu_principal():
                 limpar_tela()
                 mostrar_usuario(memoria)
             elif opcoes == '0':
-                print("🛑 Saindo do sistema... Obrigado!")
-                break  # Encerra o loop para sair do menu
+                sair_s()
+                
         except ReturnToMain:
             print("↩️ Retornando ao menu principal.")
-            input("Pressione Enter para continuar...")
+            limpar_tela()
 
-# Chama o menu principal
 menu_principal()
-
 
 
 

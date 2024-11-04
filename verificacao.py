@@ -1,8 +1,9 @@
 from datetime import datetime
 import re
+import os
 
 def limpar_tela():
-    print("\n" * 100)  # Limpa a tela para uma nova interface
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def nome_v():
     while True:
@@ -17,7 +18,7 @@ def nome_v():
         if " " not in nome:
             erros.append("Por favor, forneça um nome completo.")
         if erros:
-            print("⚠️ Erros encontrados:")
+            print("⚠️  Erros encontrados:")
             for erro in erros:
                 print(f"- {erro}")
         else:
@@ -31,13 +32,14 @@ def senha_v():
         if (len(senha) < 8 or
             not re.search(r"[A-Z]", senha) or  
             not re.search(r"[a-z]", senha) or  
-            not re.search(r"[0-9]", senha) or  
+            not re.search(r"[0-9]", senha) or
+            re.search(r" ") or 
             not re.search(r"[!@#$%^&*(),.?\":{}|<>]", senha)):
             
             print("⚠️ Senha inválida. A senha deve ter pelo menos 8 caracteres e incluir uma letra maiúscula, uma letra minúscula, um número e um caractere especial.")
         else:
             print("✅ Senha válida.")
-            return senha  
+        return senha  
 
 def idade_v():
     while True:
@@ -64,7 +66,7 @@ def cidade_v():
 def validar_cep():
     while True:
         print("📮 " + "=" * 20 + " Validação de CEP " + "=" * 20 + " 📮")
-        cep = input("Digite o CEP (formato XXXXX-XXX): ")
+        cep = input("Digite o CEP (formato XXXXX-XXX): ").strip()
         
         cep = cep.replace(" ", "")
 
@@ -76,15 +78,17 @@ def validar_cep():
 def validar_data_nascimento():
     while True:
         print("📅 " + "=" * 20 + " Data de Nascimento " + "=" * 20 + " 📅")
-        data_nascimento = input("Digite sua data de nascimento (DD/MM/AAAA): ")
+        data_nascimento_str = input("Digite sua data de nascimento (DD/MM/AAAA): ").strip()
         try:
-            data_nascimento = datetime.strptime(data_nascimento, "%d/%m/%Y")
+            data_nascimento = datetime.strptime(data_nascimento_str, "%d/%m/%Y")
             data_atual = datetime.now()
+            
             idade = data_atual.year - data_nascimento.year - (
-                        (data_atual.month, data_atual.day) < (data_nascimento.month, data_nascimento.day))
+                (data_atual.month, data_atual.day) < (data_nascimento.month, data_nascimento.day)
+            )
 
             if 0 < idade < 120:
-                return data_nascimento
+                return data_nascimento.strftime("%d/%m/%Y")
             else:
                 print("⚠️ Data inválida. Insira uma data de nascimento que resulte em uma idade entre 0 e 120 anos.")
 
@@ -102,7 +106,7 @@ def rua_v():
 def cpf_v():
     while True:
         print("📜 " + "=" * 20 + " Validação de CPF " + "=" * 20 + " 📜")
-        entrada_do_cpf = input("CPF: ")
+        entrada_do_cpf = input("CPF no formato(XXX.XXX.XXX-XX): ").strip()
         cpf = re.sub(r'[^0-9]', '', entrada_do_cpf)
 
         entrada_eh_sequencial = entrada_do_cpf == entrada_do_cpf[0] * len(entrada_do_cpf)
@@ -136,8 +140,32 @@ def cpf_v():
 
         if cpffinal == cpf:
             print(f"✅ Esse CPF {cpf} é válido.")
+            return cpf
         else: 
             print("⚠️ CPF inválido.")
+
+def nome_dados():
+    while True:
+        nome_usuario = str(input("Nome completo: ")).strip()
+        erros = []
+ 
+        if len(nome_usuario) < 3 or len(nome_usuario) > 50:
+            erros.append("Seu nome deve ter entre 3 e 50 caracteres.")
+        if not nome_usuario.replace(" ", "").isalpha():
+            erros.append("O nome deve conter apenas letras.")
+        if " " not in nome_usuario:
+            erros.append("Por favor, forneça um nome completo.")
+        if erros:
+            print("Erros encontrados:")
+            for erro in erros:
+                print(f"- {erro}")
+        else:
+            return nome_usuario
+        
+def senha_dados():
+    while True:
+        senha_usuario = input("Digite sua senha (mínimo de 8 caracteres, pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial): ").strip()
+        return senha_usuario
 
 def sair_do_sistema():
     print("🚪 " + "=" * 20 + " Sair do Sistema " + "=" * 20 + " 🚪")
