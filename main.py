@@ -26,17 +26,18 @@ def menu_principal():
             continue
 
         try:
-            if opcoes == '1':
-                limpar_tela()
-                cadastro(memoria)  
-            elif opcoes == '2':
-                limpar_tela()
-                dados_usuario(memoria)
-            elif opcoes == '3':
-                limpar_tela()
-                mostrar_usuario(memoria)
-            elif opcoes == '0':
-                sair_s()
+            match opcoes:
+                case '1':
+                    limpar_tela()
+                    cadastro(memoria)  
+                case '2':
+                    limpar_tela()
+                    dados_usuario(memoria)
+                case '3':
+                    limpar_tela()
+                    mostrar_usuario(memoria)
+                case '0':
+                    sair_s()
                 
         except ReturnToMain:
             print("↩️ Retornando ao menu principal.")

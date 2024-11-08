@@ -37,9 +37,10 @@ def senha_v():
             not re.search(r"[!@#$%^&*(),.?\":{}|<>]", senha)):
             
             print("⚠️ Senha inválida. A senha deve ter pelo menos 8 caracteres e incluir uma letra maiúscula, uma letra minúscula, um número e um caractere especial.")
+            
         else:
             print("✅ Senha válida.")
-        return senha  
+            return senha  
 
 def idade_v():
     while True:

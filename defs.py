@@ -2,6 +2,7 @@ import os
 import verificacao
 import sys
 
+
 class ReturnToMain(Exception):
     pass
 
@@ -43,10 +44,10 @@ def dados_usuario(memoria):
     while True:
         limpar_tela()
         print("🔍 Buscando dados do usuário...")
-
+        
         nome_usuario = verificacao.nome_dados()
         senha_usuario = verificacao.senha_dados()
-       
+        
         if (nome_usuario, senha_usuario) in memoria:
             limpar_tela()
             dados = memoria[(nome_usuario, senha_usuario)]
@@ -63,7 +64,7 @@ def dados_usuario(memoria):
             return
         else:
             print("Usuário não encontrado.")
-        voltar_esc()
+            voltar_esc()
 
 def mostrar_usuario(memoria):
     limpar_tela()
