@@ -1,4 +1,4 @@
-# Sistema de Cadastro em Python
+# Sistema de Cadastro 
 
 Este é um sistema de cadastro completo desenvolvido em Python, com foco em validação de dados e simulação de um banco de dados em memória. O projeto implementa funcionalidades essenciais para registrar e gerenciar cadastros de forma simples e eficiente.
 
